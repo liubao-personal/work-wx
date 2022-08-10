@@ -61,7 +61,7 @@ build/Release
 
 # Dependency directories
 node_modules/
-jspm_packages/
+#jspm_packages/
 package-lock.json
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -138,3 +138,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+!/package-lock.json
