@@ -6,14 +6,14 @@ const plugin: EggPlugin = {
   //   enable: true,
   //   package: 'egg-view-nunjucks',
   // },
-  mongoose:{
+  mongoose: {
     enable: true,
     package: 'egg-mongoose',
   },
   redis: {
     enable: true,
     package: 'egg-redis',
-  }
+  },
 };
 
 export default plugin;
