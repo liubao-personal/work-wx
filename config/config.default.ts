@@ -23,18 +23,24 @@ export default (appInfo: EggAppInfo) => {
   // add your special config in here
   const bizConfig = {
     mySiteUrl: `https://liubao.org.cn`,
+    mongoose: {
+      client: {
+        url: process.env.MONGODBURL,
+        options: { useUnifiedTopology: true },
+      },
+    },
     redis: {
       clients: {
         workWx: {
-          port: process.env.RedisPort,
-          host: process.env.RedisHost,
-          password: process.env.RedisPassword,
+          port: process.env.REDISPORT,
+          host: process.env.REDISHOST,
+          password: process.env.REDISPASSWORD,
           db: 0,
         },
         app: {
-          port: process.env.RedisPort,
-          host: process.env.RedisHost,
-          password: process.env.RedisPassword,
+          port: process.env.REDISPORT,
+          host: process.env.REDISHOST,
+          password: process.env.REDISPASSWORD,
           db: 2,
         },
       }
