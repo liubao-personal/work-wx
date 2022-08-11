@@ -11,7 +11,9 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_1660110624517_4272';
 
   // add your egg config in here
-  config.middleware = [];
+  config.middleware = [
+    'req',
+  ];
 
   // work-wx config
   config.workWx = {
