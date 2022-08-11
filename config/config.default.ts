@@ -15,9 +15,10 @@ export default (appInfo: EggAppInfo) => {
 
   // work-wx config
   config.workWx = {
-    AgentId: process.env?.AgentId || 'your 自建应用id',
-    Secret: process.env?.Secret || 'your 自建应用密钥',
-    CorpId: process.env?.CorpId || 'your 企业id',
+    BaseUrl: process.env?.BASEURL,
+    AgentId: process.env?.AGENTID || 'your 自建应用id',
+    Secret: process.env?.SECRET || 'your 自建应用密钥',
+    CorpId: process.env?.CORPID || 'your 企业id',
   };
 
   // add your special config in here
