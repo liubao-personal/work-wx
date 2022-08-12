@@ -25,6 +25,7 @@ export default (appInfo: EggAppInfo) => {
     AgentId: process.env?.AGENTID || 'your 自建应用id',
     Secret: process.env?.SECRET || 'your 自建应用密钥',
     CorpId: process.env?.CORPID || 'your 企业id',
+    RedirectUri: process.env?.REDIRECT_URI || 'your 回调地址，用来授权时接收code',
   };
 
   // add your special config in here
