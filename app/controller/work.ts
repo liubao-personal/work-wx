@@ -25,8 +25,8 @@ export default class WorkController extends BaseController {
    */
   async authorize() {
     const { ctx, config } = this;
-    let oauthUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${ config.workWx.CorpId }&redirect_uri=${ encodeURIComponent(config.workWx.RedirectUri) }&response_type=code&scope=snsapi_privateinfo&state=STATE&agentid=${ config.workWx.AgentId }#wechat_redirect`;
-    ctx.status = 301
+    const oauthUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${config.workWx.CorpId}&redirect_uri=${encodeURIComponent(config.workWx.RedirectUri)}&response_type=code&scope=snsapi_privateinfo&state=STATE&agentid=${config.workWx.AgentId}#wechat_redirect`;
+    ctx.status = 301;
     ctx.redirect(oauthUrl);
   }
 
@@ -35,24 +35,21 @@ export default class WorkController extends BaseController {
    */
   async back() {
     const { ctx, config } = this;
-    const code = this.getQuery().code
-    const { data: user } = await ctx.curl(config.workWx.BaseUrl + `user/getuserinfo?access_token=${ ctx.state.accessToken }&code=${ code }`, {
-      dataType: 'json'
-    })
-    const { UserId, DeviceId, user_ticket } = user // 用户id,设备号,成员票据(访问敏感信息)
-    const { data: detail } = await ctx.curl(config.workWx.BaseUrl + `user/getuserdetail?access_token=${ ctx.state.accessToken }`, {
+    const code = this.getQuery().code;
+    const { data: user } = await ctx.curl(config.workWx.BaseUrl + `user/getuserinfo?access_token=${ctx.state.accessToken}&code=${code}`, {
+      dataType: 'json',
+    });
+    const { UserId, DeviceId, user_ticket } = user; // 用户id,设备号,成员票据(访问敏感信息)
+    const { data: detail } = await ctx.curl(config.workWx.BaseUrl + `user/getuserdetail?access_token=${ctx.state.accessToken}`, {
       method: 'POST',
       dataType: 'json',
       contentType: 'json',
       data: {
-        user_ticket
-      }
-    })
-    const userInfo: object = { UserId, DeviceId, ...detail } // 拿到合并后的对象
+        user_ticket,
+      },
+    });
+    const userInfo: object = { UserId, DeviceId, ...detail }; // 拿到合并后的对象
     this.success({ data: user });
-    await ctx.service.base.getWechatRedis().set(`work:userInfo:${ UserId }`, JSON.stringify(userInfo));
-  }
-
-  async getUserInfo() {
+    await ctx.service.base.getWechatRedis().set(`work:userInfo:${UserId}`, JSON.stringify(userInfo));
   }
 }
