@@ -8,7 +8,7 @@ export default function Exception(): any {
     try {
       await next();
       if (ctx.app.config.env !== 'local') {
-        ctx.logger.info(Object.keys(ctx.request.body).length ? `\n请求体为:${ JSON.stringify(ctx.request.body) }` : '', `\n响应体为:${ JSON.stringify(ctx.response.body) }\n`);
+        ctx.logger.info(Object.keys(ctx.request.body).length ? `\n请求体为:${JSON.stringify(ctx.request.body)}` : '', `\n响应体为:${JSON.stringify(ctx.response.body)}\n`);
       }
     } catch (err: any) {
       if (err.code && err.code === 'invalid_param') return ctx.failure(err.code, err.errors);

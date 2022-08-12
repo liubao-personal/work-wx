@@ -17,7 +17,7 @@ export default (appInfo: EggAppInfo) => {
   ];
   config.workAccessToken = {
     enable: false, // workAccessToken中间件注册全局开关，默认close
-  }
+  };
 
   // work-wx config
   config.workWx = {
