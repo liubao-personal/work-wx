@@ -13,7 +13,11 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = [
     'req',
+    'workAccessToken',
   ];
+  config.workAccessToken = {
+    enable: false, // workAccessToken中间件注册全局开关，默认close
+  }
 
   // work-wx config
   config.workWx = {
