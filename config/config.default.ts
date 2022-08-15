@@ -12,10 +12,10 @@ export default (appInfo: EggAppInfo) => {
 
   // csrf 安全配置
   config.security = {
-    csrf : {
+    csrf: {
       enable: false,
-      domainWhiteList: ['*'], // 安全白名单，例如'.domain.com'
-    }
+      domainWhiteList: [ '*' ], // 安全白名单，例如'.domain.com'
+    },
   };
 
   // add your egg config in here

@@ -56,7 +56,7 @@ export default class WorkController extends BaseController {
   /**
    * 撤回应用消息
    */
-  async recall(){
+  async recall() {
     const { ctx, config } = this;
     const msgid = this.getBody().msgid;
     const { data } = await ctx.curl(config.workWx.BaseUrl + `message/recall?access_token=${ctx.state.accessToken}`, {
