@@ -10,5 +10,6 @@ export default (app: Application) => {
   router.get('/work/send', workAccessToken, controller.work.send);
   router.get('/work/authorize', workAccessToken, controller.work.authorize); // 企业微信网页授权
   router.get('/work/back', workAccessToken, controller.work.back); // 授权后回调地址
+  router.post('/work/recall', workAccessToken, controller.work.recall); // 撤回应用消息
   /* 企业微信api end */
 };

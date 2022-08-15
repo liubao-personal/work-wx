@@ -52,4 +52,18 @@ export default class WorkController extends BaseController {
     this.success({ data: user });
     await ctx.service.base.getWechatRedis().set(`work:userInfo:${UserId}`, JSON.stringify(userInfo));
   }
+
+  async recall(){
+    const { ctx, config } = this;
+    const msgid = this.getBody().msgid;
+    const { data } = await ctx.curl(config.workWx.BaseUrl + `message/recall?access_token=${ctx.state.accessToken}`, {
+      method: 'POST',
+      dataType: 'json',
+      contentType: 'json',
+      data: {
+        msgid,
+      },
+    });
+    this.success({ data });
+  }
 }
