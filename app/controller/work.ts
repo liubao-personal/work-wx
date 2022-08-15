@@ -53,6 +53,9 @@ export default class WorkController extends BaseController {
     await ctx.service.base.getWechatRedis().set(`work:userInfo:${UserId}`, JSON.stringify(userInfo));
   }
 
+  /**
+   * 撤回应用消息
+   */
   async recall(){
     const { ctx, config } = this;
     const msgid = this.getBody().msgid;
@@ -65,5 +68,15 @@ export default class WorkController extends BaseController {
       },
     });
     this.success({ data });
+  }
+
+  /**
+   * 扫码登录的构建地址，重定向后拿到登录者信息
+   */
+  async openqr() {
+    const { ctx, config } = this;
+    const oauthUrl = `https://open.work.weixin.qq.com/wwopen/sso/qrConnect?appid=${config.workWx.CorpId}&agentid=${config.workWx.AgentId}&redirect_uri=${encodeURIComponent(config.workWx.RedirectUri)}&state=STATE`;
+    ctx.status = 301;
+    ctx.redirect(oauthUrl);
   }
 }
