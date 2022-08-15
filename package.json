@@ -8,7 +8,7 @@
     "declarations": true
   },
   "scripts": {
-    "start": "egg-scripts start --port=7004 --daemon --title=egg-server-work-wx",
+    "start": "egg-scripts start --port=7004 --workers=1 --daemon --title=egg-server-work-wx",
     "stop": "egg-scripts stop --title=egg-server-work-wx",
     "dev": "egg-bin dev --port=7004",
     "debug": "egg-bin debug --port=7004",
