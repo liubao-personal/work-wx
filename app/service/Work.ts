@@ -11,7 +11,7 @@ export default class Test extends BaseService {
       const { data: { access_token, expires_in } } = await ctx.curl(
         config.workWx.BaseUrl + 'gettoken?corpid=' + config.workWx.CorpId + '&corpsecret=' + config.workWx.Secret, {
           dataType: 'json',
-          timeout: 180,
+          timeout: 2000,
         },
       );
       dateResult = access_token;
