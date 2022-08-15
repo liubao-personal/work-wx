@@ -2,7 +2,7 @@ import { EggAppConfig, PowerPartial } from 'egg';
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {
-    // mongoose配置
+    /* // mongoose配置
     mongoose: {
       client: {
         url: 'mongodb://localhost:27017/',
@@ -25,7 +25,7 @@ export default () => {
           db: 2,
         },
       },
-    },
+    },*/
   };
   return config;
 };
