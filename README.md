@@ -1,7 +1,12 @@
-# hackernews-async-ts
+# built website
 
-[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
+[构建的服务地址](https://work-wx.liubao.org.cn/) 
 
+### 实现了如下功能：
+- 扫码授权登录
+- 网页授权登录
+- 获取用户信息
+- 应用消息推送
 ## QuickStart
 
 ### Development
@@ -9,7 +14,7 @@
 ```bash
 $ npm i
 $ npm run dev
-$ open http://localhost:7005/
+$ open http://localhost:7004/
 ```
 
 Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
