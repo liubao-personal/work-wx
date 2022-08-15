@@ -1,12 +1,13 @@
-# built website
-
-[构建的服务地址](https://work-wx.liubao.org.cn/) 
+**[构建的服务地址](https://work-wx.liubao.org.cn/)** 
 
 ### 实现了如下功能：
 - 扫码授权登录
 - 网页授权登录
 - 获取用户信息
 - 应用消息推送
+
+### how to use
+copy .env.example in the root directory changes to .env, and add your own configuration
 ## QuickStart
 
 ### Development
