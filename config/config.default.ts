@@ -10,6 +10,14 @@ export default (appInfo: EggAppInfo) => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1660110624517_4272';
 
+  // csrf 安全配置
+  config.security = {
+    csrf : {
+      enable: false,
+      domainWhiteList: ['*'], // 安全白名单，例如'.domain.com'
+    }
+  };
+
   // add your egg config in here
   config.middleware = [
     'req',
