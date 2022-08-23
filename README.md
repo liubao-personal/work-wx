@@ -26,6 +26,11 @@ Don't tsc compile at development mode, if you had run `tsc` then you need to `np
 $ npm run tsc
 $ npm start
 ```
+<b>tips:如果使用docker部署一定要删除--daemon  
+如果不需要docker部署，请在package.json文件启动命令开启后台模式</b>
+```bash
+ "start": "egg-scripts start --port=7004 --daemon --workers=1 --title=egg-server-work-wx"
+```
 
 ### Npm Scripts
 
