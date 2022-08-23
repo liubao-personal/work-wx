@@ -31,6 +31,11 @@ $ npm start
 ```bash
  "start": "egg-scripts start --port=7004 --daemon --workers=1 --title=egg-server-work-wx"
 ```
+### docker build
+```bash
+docker build -t work-wx . #创建镜像
+docker run -itd --name work-wx -p 7004:7004 work-wx #运行一个容器 work-wx也可换成上面创建的镜像id
+```
 
 ### Npm Scripts
 
