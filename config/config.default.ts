@@ -51,7 +51,7 @@ export default (appInfo: EggAppInfo) => {
           port: process.env.REDISPORT,
           host: process.env.REDISHOST,
           password: process.env.REDISPASSWORD,
-          db: 0,
+          db: process.env.REDISDB,
         },
         app: {
           port: process.env.REDISPORT,
