@@ -21,7 +21,10 @@ export default (app: Application) => {
   router.post('/work/appchat/update', workAccessToken, controller.appChat.update); // 获取群聊会话
   /* 群聊相关api end */
 
-  /* 成员管理相关api start */
+  /* 通讯录管理相关api start */
+  router.get('/work/user/get', workAccessToken, controller.user.get); // 获取成员ID列表
   router.post('/work/user/list_id', workAccessToken, controller.user.list); // 获取成员ID列表
-  /* 成员管理相关api end */
+  router.get('/work/user/simplelist', workAccessToken, controller.user.simplelist); // 获取部门成员(组织架构)
+  router.get('/work/department/list', workAccessToken, controller.user.departmentList); // 获取部门ID列表
+  /* 通讯录管理相关api end */
 };
