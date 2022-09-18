@@ -7,7 +7,7 @@ export default class userController extends BaseController {
    */
   async list() {
     const { ctx, config } = this;
-    const { data } = await ctx.curl(config.workWx.BaseUrl + `/user/list_id?access_token=${ctx.state.accessToken}`, {
+    const { data } = await ctx.curl(config.workWx.BaseUrl + `/user/list_id?access_token=${ctx.state.contactsAccessToken}`, {
       method: 'POST',
       dataType: 'json',
       contentType: 'json',

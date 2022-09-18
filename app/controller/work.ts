@@ -9,6 +9,15 @@ export default class WorkController extends BaseController {
     await this.success({ data: dateResult });
   }
 
+  /**
+   * 因部分api自建应用无权限调用，需使用通讯录秘钥换的access_token
+   */
+  async getContactsToken() {
+    const { ctx } = this;
+    const dateResult: string = await ctx.service.work.getContactsToken();
+    await this.success({ data: dateResult });
+  }
+
   async send() {
     const { ctx } = this;
     const body = ctx.request.body;
@@ -50,7 +59,8 @@ export default class WorkController extends BaseController {
     });
     const userInfo: object = { UserId, DeviceId, ...detail }; // 拿到合并后的对象
     this.success({ data: user });
-    await ctx.service.base.getWechatRedis().set(`work:userInfo:${UserId}`, JSON.stringify(userInfo));
+    await ctx.service.base.getWechatRedis()
+      .set(`work:userInfo:${UserId}`, JSON.stringify(userInfo));
   }
 
   /**

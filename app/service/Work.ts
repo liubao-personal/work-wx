@@ -6,16 +6,36 @@ import BaseService from './Base';
 export default class Test extends BaseService {
   public async getToken() {
     const { ctx, config } = this;
-    let dateResult: string = await ctx.service.base.getWechatRedis().get('work:access_token') || '';
+    let dateResult: string = await ctx.service.base.getWechatRedis()
+      .get('work:access_token') || '';
     if (!dateResult) {
       const { data: { access_token, expires_in } } = await ctx.curl(
         config.workWx.BaseUrl + 'gettoken?corpid=' + config.workWx.CorpId + '&corpsecret=' + config.workWx.Secret, {
           dataType: 'json',
-          timeout: 2000,
+          timeout: 5000,
         },
       );
       dateResult = access_token;
-      await ctx.service.base.getWechatRedis().set('work:access_token', access_token, 'EX', expires_in || 7200);
+      await ctx.service.base.getWechatRedis()
+        .set('work:access_token', access_token, 'EX', expires_in || 7200);
+    }
+    return dateResult;
+  }
+
+  public async getContactsToken() {
+    const { ctx, config } = this;
+    let dateResult: string = await ctx.service.base.getWechatRedis()
+      .get('contacts:access_token') || '';
+    if (!dateResult) {
+      const { data: { access_token, expires_in } } = await ctx.curl(
+        config.workWx.BaseUrl + 'gettoken?corpid=' + config.workWx.CorpId + '&corpsecret=' + config.workWx.ContactsSecret, {
+          dataType: 'json',
+          timeout: 5000,
+        },
+      );
+      dateResult = access_token;
+      await ctx.service.base.getWechatRedis()
+        .set('contacts:access_token', access_token, 'EX', expires_in || 7200);
     }
     return dateResult;
   }
