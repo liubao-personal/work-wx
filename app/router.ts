@@ -29,4 +29,12 @@ export default (app: Application) => {
   router.get('/work/user/simplelist', workAccessToken, controller.user.simplelist); // 获取部门成员(组织架构)
   router.get('/work/department/list', workAccessToken, controller.user.departmentList); // 获取部门ID列表
   /* 通讯录管理相关api end */
+
+  /* 外部联系人api start */
+  router.get('/work/externalcontact/list', workAccessToken, controller.externalcontact.list); // 获取客户列表
+  router.get('/work/externalcontact/get', workAccessToken, controller.externalcontact.get); // 获取客户详情
+  router.get('/work/externalcontact/batch', workAccessToken, controller.externalcontact.batch); // 批量获取客户详情
+  router.post('/work/externalcontact/addMsgTemplate', workAccessToken, controller.externalcontact.addMsgTemplate); // 创建企业群发
+  router.post('/work/externalcontact/getGroupMsgListV2', workAccessToken, controller.externalcontact.getGroupMsgListV2); // 获取群发记录列表
+  /* 外部联系人api end */
 };
