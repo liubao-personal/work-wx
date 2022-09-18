@@ -4,7 +4,10 @@
 - 扫码授权登录
 - 网页授权登录
 - 获取用户信息
-- 应用消息推送
+- 自建应用消息推送
+- 群聊相关api
+- 通讯录管理相关api
+- 外部联系人相关api
 
 ### how to use
 copy .env.example in the root directory changes to .env, and add your own configuration
