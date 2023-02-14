@@ -7,7 +7,7 @@ export default class ChatController extends BaseController {
     const api = new ChatGPTAPI({
       apiKey: process.env.OPENAI_API_KEY || '',
     });
-    const query = this.getQuery().query;
+    const query = this.getQuery().keywords;
 
     // const res = await api.sendMessage('请用中文和我说话');
     const res = await api.sendMessage(query, {
