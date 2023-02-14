@@ -2,7 +2,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es2017",
-    "module": "commonjs",
+    "module": "nodenext",
     "strict": true,
     "noImplicitAny": false,
     "experimentalDecorators": true,

@@ -37,4 +37,9 @@ export default (app: Application) => {
   router.post('/work/externalcontact/addMsgTemplate', workAccessToken, controller.externalcontact.addMsgTemplate); // 创建企业群发
   router.post('/work/externalcontact/getGroupMsgListV2', workAccessToken, controller.externalcontact.getGroupMsgListV2); // 获取群发记录列表
   /* 外部联系人api end */
+
+  /* chatGpt api start */
+  router.get('/chat/test', controller.chat.test);
+  /* chatGpt api end */
+
 };
