@@ -1,4 +1,5 @@
 import BaseController from './base';
+import { PassThrough } from 'stream';
 
 export default class ChatController extends BaseController {
   public async test() {
@@ -8,11 +9,20 @@ export default class ChatController extends BaseController {
       apiKey: process.env.OPENAI_API_KEY || '',
     });
     const query = this.getQuery().keywords;
-
-    // const res = await api.sendMessage('请用中文和我说话');
-    const res = await api.sendMessage(query, {
-      onProgress: partialResponse => console.log(partialResponse.text),
+    this.ctx.set('Content-Type', 'text/event-stream; charset="utf-8"');
+    this.ctx.set('Connection', 'keep-alive');
+    this.ctx.set('Cache-Control', 'no-cache');
+    this.ctx.set('Access-Control-Allow-Origin', '*');
+    const stream = new PassThrough();
+    let id = 1;
+    api.sendMessage(query, {
+      onProgress: partialResponse => stream.write(`event:eventName\n retry:1000\n id:${id++}\n data: ${partialResponse.text}\n\n`),
+    }).then(response => {
+      console.log(1222, response.text);
     });
-    ctx.body = res.text;
+    stream.on('close', function() {
+      console.log('closed.');
+    });
+    ctx.body = stream;
   }
 }
