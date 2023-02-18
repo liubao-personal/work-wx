@@ -39,7 +39,8 @@ export default (app: Application) => {
   /* 外部联系人api end */
 
   /* chatGpt api start */
-  router.get('/event/stream', controller.chat.test);
+  router.get('/event/test', controller.chat.test);
+  router.get('/event/stream', controller.chat.text);
   /* chatGpt api end */
 
 };
