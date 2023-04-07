@@ -41,6 +41,7 @@ export default (app: Application) => {
   /* chatGpt api start */
   router.get('/event/test', controller.chat.test);
   router.get('/event/stream', controller.chat.text);
+  router.get('/event/sse', controller.chat.sse);
   /* chatGpt api end */
 
 };

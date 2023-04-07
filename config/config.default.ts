@@ -37,6 +37,10 @@ export default (appInfo: EggAppInfo) => {
     RedirectUri: process.env?.REDIRECT_URI || 'your 回调地址，用来授权时接收code',
   };
 
+  config.chat = {
+    url: process.env.CHATURL,
+  };
+
   // add your special config in here
   const bizConfig = {
     mySiteUrl: 'https://liubao.org.cn',
