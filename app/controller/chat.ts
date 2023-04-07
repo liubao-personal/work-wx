@@ -291,7 +291,9 @@ export default class ChatController extends BaseController {
             const encodedData = Buffer.from(data.text, 'utf-8')
               .toString('base64');
             stream.write('id: ' + i + '\n\n');
-            stream.write('data: ' + `${encodedData}` + '\n\n');
+            stream.write(`data: ${encodedData}
+
+`);
           }
         }
       }, i * 20);
