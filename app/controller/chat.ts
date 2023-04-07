@@ -47,11 +47,16 @@ export default class ChatController extends BaseController {
       method: 'POST',
       timeout: 30000,
     });
-    this.ctx.set('Content-Type', 'text/event-stream; charset="utf-8"');
-    this.ctx.set('Connection', 'keep-alive');
-    this.ctx.set('Cache-Control', 'no-cache');
-    this.ctx.set('Access-Control-Allow-Origin', '*');
+    // 设置响应头
+    ctx.set('Content-Type', 'text/event-stream; charset="utf-8"');
+    ctx.set('Connection', 'keep-alive');
+    ctx.set('Cache-Control', 'no-cache');
+    ctx.set('Access-Control-Allow-Origin', '*');
+
+    // 创建一个可写流
     const stream = new PassThrough();
+
+    // 向流中写入初始数据
     stream.write('retry: 10000\n');
     stream.write('event: connecttime\n');
     // const result = { data: '' };
@@ -283,24 +288,25 @@ export default class ChatController extends BaseController {
     //   '{"role":"assistant","id":"chatcmpl-71zTBN6Ceb10bRwEhceTrh6kmUfW3","parentMessageId":"2a007b84-92ba-4a1f-a9c8-67c95fb914d9","text":"李白（701年-762年），是唐代著名的诗人之一。他出生在陕西成纪（今兴平市）一个贫寒的家庭，自幼聪慧好学，喜爱文学。他曾经游历过大半个中国，广交朋友，写下了大量优美的诗歌，被誉为“诗仙”。\\n\\n李白一生共创作了约1100余首诗歌和散文，并以豪放派诗风、妙语连珠、情感奔放而闻名于世。他的代表作品有《将进酒》、《庐山谣》、《望庐山瀑布》等。\\n\\n晚年，李白因天宝元年（742年）的安史之乱遭受流亡困苦，不得归国，最终在长安去世。李白被誉为“诗仙”、“诗圣”，被后人视为唐代最伟大的诗人之一。","detail":{"id":"chatcmpl-71zTBN6Ceb10bRwEhceTrh6kmUfW3","object":"chat.completion.chunk","created":1680708973,"model":"gpt-3.5-turbo-0301","choices":[{"delta":{},"index":0,"finish_reason":"stop"}]}}';
     const lines = result.data.split('\n');
     for (let i = 0; i < lines.length; i++) {
-      setTimeout(() => {
-        const line = lines[i].trim();
-        if (line) {
-          const data = JSON.parse(line);
-          if (typeof data.delta === 'string') {
-            const encodedData = Buffer.from(data.text, 'utf-8')
-              .toString('base64');
-            stream.write('id: ' + i + '\n\n');
-            stream.write(`data: ${encodedData}
-
-`);
-          }
+      const line = lines[i].trim();
+      if (line) {
+        const data = JSON.parse(line);
+        if (typeof data.delta === 'string') {
+          const encodedData = Buffer.from(data.text, 'utf-8')
+            .toString('base64');
+          const id = i.toString();
+          const event = 'message';
+          const message = `id: ${id}\nevent: ${event}\ndata: ${encodedData}\n\n`;
+          setTimeout(async () => {
+            stream.write(message);
+          }, i * 5);
         }
-      }, i * 20);
-      stream.on('close', function() {
-        console.log('closed.');
-      });
+      }
     }
+    stream.on('close', () => {
+      console.log('closed.');
+      stream.removeAllListeners();
+    });
     ctx.body = stream;
   }
 }
